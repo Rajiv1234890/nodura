@@ -1,20 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  EyeIcon, 
+  TrendingUp, 
+  Users, 
+  DollarSign, 
+  Video, 
+  Image as ImageIcon, 
+  Lock, 
+  Unlock
+} from "lucide-react";
 import { Content } from "@shared/schema";
-import { Badge } from "@/components/ui/badge";
-import { formatTimeAgo } from "@/lib/utils";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend
-} from "recharts";
 
 interface DashboardStatsProps {
   stats?: {
@@ -32,236 +27,210 @@ interface DashboardStatsProps {
 }
 
 export default function DashboardStats({ stats }: DashboardStatsProps) {
-  // If stats are not loaded yet, show loading skeleton
-  if (!stats) {
-    return (
-      <div className="p-6 space-y-6">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="animate-pulse">
-              <CardHeader className="pb-2">
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-              </CardHeader>
-              <CardContent>
-                <div className="h-8 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="animate-pulse">
-            <CardHeader>
-              <div className="h-5 bg-gray-200 rounded w-1/3"></div>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64 bg-gray-200 rounded"></div>
-            </CardContent>
-          </Card>
-          
-          <Card className="animate-pulse">
-            <CardHeader>
-              <div className="h-5 bg-gray-200 rounded w-1/3"></div>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64 bg-gray-200 rounded"></div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
-  
-  // Format data for charts
-  const contentTypeData = [
-    { name: 'Videos', value: stats.contentCount.videos, fill: '#3b82f6' },
-    { name: 'Photos', value: stats.contentCount.photos, fill: '#8b5cf6' },
-  ];
-  
-  const accessLevelData = [
-    { name: 'Free', value: stats.contentCount.free, fill: '#10b981' },
-    { name: 'Premium', value: stats.contentCount.premium, fill: '#6d28d9' },
-  ];
-  
-  const COLORS = ['#3b82f6', '#8b5cf6', '#6d28d9', '#10b981'];
+  // Revenue is calculated for demo purposes
+  const estimatedRevenue = stats ? stats.premiumMembers * 9.99 : 0;
   
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      
-      {/* Stats overview cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div>
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500">
-              Total Content Views
-            </CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Total Views</CardTitle>
+            <EyeIcon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.totalViews.toLocaleString()}</div>
-            <p className="text-xs text-gray-500 mt-1">Lifetime views across all content</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500">
-              Premium Members
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{stats.premiumMembers}</div>
-            <p className="text-xs text-gray-500 mt-1">Active premium subscribers</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500">
-              Total Content
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{stats.contentCount.total}</div>
-            <p className="text-xs text-gray-500 mt-1">
-              {stats.contentCount.videos} videos, {stats.contentCount.photos} photos
+            <div className="text-2xl font-bold">
+              {stats ? stats.totalViews.toLocaleString() : "-"}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              +2.5% from last month
             </p>
           </CardContent>
         </Card>
         
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500">
-              Premium Content
-            </CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Revenue</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{stats.contentCount.premium}</div>
-            <p className="text-xs text-gray-500 mt-1">
-              {(stats.contentCount.premium / stats.contentCount.total * 100).toFixed(1)}% of total content
+            <div className="text-2xl font-bold">
+              ${estimatedRevenue.toFixed(2)}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              +10.1% from last month
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Premium Members</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {stats ? stats.premiumMembers.toLocaleString() : "-"}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              +4.6% from last month
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Total Content</CardTitle>
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {stats ? stats.contentCount.total.toLocaleString() : "-"}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              +12 new uploads this week
             </p>
           </CardContent>
         </Card>
       </div>
       
-      {/* Charts section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Content Breakdown */}
+      <h2 className="text-xl font-semibold mb-4">Content Breakdown</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <Card>
-          <CardHeader>
-            <CardTitle>Content Distribution</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Videos</CardTitle>
+            <Video className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={contentTypeData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {contentTypeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => [`${value} items`, 'Count']} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+            <div className="text-2xl font-bold">
+              {stats ? stats.contentCount.videos.toLocaleString() : "-"}
+            </div>
+            <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
+              <div 
+                className="h-full bg-red-500 rounded-full" 
+                style={{ 
+                  width: stats ? `${(stats.contentCount.videos / stats.contentCount.total) * 100}%` : "0%" 
+                }}
+              ></div>
             </div>
           </CardContent>
         </Card>
         
         <Card>
-          <CardHeader>
-            <CardTitle>Access Level Distribution</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Photos</CardTitle>
+            <ImageIcon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={accessLevelData}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip formatter={(value) => [`${value} items`, 'Count']} />
-                  <Legend />
-                  <Bar dataKey="value" name="Content Count">
-                    {accessLevelData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="text-2xl font-bold">
+              {stats ? stats.contentCount.photos.toLocaleString() : "-"}
+            </div>
+            <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
+              <div 
+                className="h-full bg-red-500 rounded-full" 
+                style={{ 
+                  width: stats ? `${(stats.contentCount.photos / stats.contentCount.total) * 100}%` : "0%" 
+                }}
+              ></div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Premium Content</CardTitle>
+            <Lock className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {stats ? stats.contentCount.premium.toLocaleString() : "-"}
+            </div>
+            <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
+              <div 
+                className="h-full bg-red-500 rounded-full" 
+                style={{ 
+                  width: stats ? `${(stats.contentCount.premium / stats.contentCount.total) * 100}%` : "0%" 
+                }}
+              ></div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Free Content</CardTitle>
+            <Unlock className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {stats ? stats.contentCount.free.toLocaleString() : "-"}
+            </div>
+            <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
+              <div 
+                className="h-full bg-red-500 rounded-full" 
+                style={{ 
+                  width: stats ? `${(stats.contentCount.free / stats.contentCount.total) * 100}%` : "0%" 
+                }}
+              ></div>
             </div>
           </CardContent>
         </Card>
       </div>
       
-      {/* Recent content table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recently Added Content</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full table-auto">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 font-medium text-gray-500">Content</th>
-                  <th className="text-left py-3 font-medium text-gray-500">Type</th>
-                  <th className="text-left py-3 font-medium text-gray-500">Access</th>
-                  <th className="text-left py-3 font-medium text-gray-500">Views</th>
-                  <th className="text-left py-3 font-medium text-gray-500">Added</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.recentContent.map((content) => (
-                  <tr key={content.id} className="border-b hover:bg-gray-50">
-                    <td className="py-3">
-                      <div className="flex items-center">
-                        <div className="h-10 w-16 rounded overflow-hidden mr-3">
-                          <img 
-                            src={content.thumbnailUrl} 
-                            alt={content.title} 
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <span className="truncate max-w-[250px]">{content.title}</span>
-                      </div>
+      {/* Recent Content */}
+      <h2 className="text-xl font-semibold mb-4">Recent Content</h2>
+      <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gray-50 border-b border-gray-200">
+                <th className="px-4 py-3 text-left font-medium text-gray-500">Title</th>
+                <th className="px-4 py-3 text-left font-medium text-gray-500">Type</th>
+                <th className="px-4 py-3 text-left font-medium text-gray-500">Access</th>
+                <th className="px-4 py-3 text-left font-medium text-gray-500">Views</th>
+                <th className="px-4 py-3 text-left font-medium text-gray-500">Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats && stats.recentContent.length > 0 ? (
+                stats.recentContent.map((content) => (
+                  <tr key={content.id} className="border-b border-gray-200 hover:bg-gray-50">
+                    <td className="px-4 py-3 text-gray-900 font-medium">
+                      {content.title}
                     </td>
-                    <td className="py-3">
-                      <Badge variant={content.type === "video" ? "default" : "outline"}>
+                    <td className="px-4 py-3 text-gray-500">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                        content.type === 'video' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+                      }`}>
                         {content.type}
-                      </Badge>
+                      </span>
                     </td>
-                    <td className="py-3">
-                      <Badge variant={content.accessLevel === "premium" ? "premium" : "free"}>
+                    <td className="px-4 py-3 text-gray-500">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                        content.accessLevel === 'premium' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'
+                      }`}>
                         {content.accessLevel}
-                      </Badge>
+                      </span>
                     </td>
-                    <td className="py-3">{content.views.toLocaleString()}</td>
-                    <td className="py-3">{formatTimeAgo(new Date(content.createdAt))}</td>
+                    <td className="px-4 py-3 text-gray-500">{content.views || 0}</td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {new Date(content.createdAt).toLocaleDateString()}
+                    </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="px-4 py-3 text-center text-gray-500">
+                    No recent content found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
