@@ -8,6 +8,7 @@ import HomePage from "@/pages/home-page";
 import BrowsePage from "@/pages/browse-page";
 import ContentViewPage from "@/pages/content-view-page";
 import PricingPage from "@/pages/pricing-page";
+import SubscribePage from "@/pages/subscribe-page";
 import AuthPage from "@/pages/auth-page";
 import AdminDashboard from "@/pages/admin/dashboard";
 import { ProtectedRoute } from "./lib/protected-route";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/browse" component={BrowsePage} />
       <Route path="/view/:id" component={ContentViewPage} />
       <Route path="/pricing" component={PricingPage} />
+      <Route path="/subscribe" component={SubscribePage} />
       <Route path="/auth" component={AuthPage} />
       <ProtectedRoute path="/admin" component={AdminDashboard} />
       <ProtectedRoute path="/admin/dashboard" component={AdminDashboard} />
