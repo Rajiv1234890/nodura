@@ -4,7 +4,7 @@ import { Express } from "express";
 import session from "express-session";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
-import { storage } from "./storage";
+import { storage, getSessionStore } from "./storage";
 import { User as SelectUser } from "@shared/schema";
 
 declare global {
@@ -33,7 +33,7 @@ export function setupAuth(app: Express) {
     secret: process.env.SESSION_SECRET || "mediapremium-secret-key",
     resave: false,
     saveUninitialized: false,
-    store: storage.sessionStore,
+    store: getSessionStore(),
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     }

@@ -6,9 +6,6 @@ const MemoryStore = createMemoryStore(session);
 
 // Storage interface
 export interface IStorage {
-  // Session store
-  sessionStore: session.SessionStore;
-  
   // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -563,4 +560,343 @@ export class MemStorage implements IStorage {
 }
 
 // Export the storage instance
-export const storage = new MemStorage();
+// Database storage implementation
+import { db } from "./db";
+import { eq, desc, sql, and, exists, inArray, like } from "drizzle-orm";
+import { QueryResult } from "drizzle-orm/pg-core";
+
+export class DatabaseStorage implements IStorage {
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async updateUser(id: number, data: Partial<User>): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set(data)
+      .where(eq(users.id, id))
+      .returning();
+    return user || undefined;
+  }
+
+  // Content methods
+  async getContent(id: number): Promise<Content | undefined> {
+    const [contentItem] = await db.select().from(content).where(eq(content.id, id));
+    return contentItem || undefined;
+  }
+
+  async getAllContent(): Promise<Content[]> {
+    return await db.select().from(content);
+  }
+
+  async getContentByType(type: string): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(and(eq(content.type, type), eq(content.isPublished, true)));
+  }
+
+  async getContentByAccessLevel(accessLevel: string): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(and(eq(content.accessLevel, accessLevel), eq(content.isPublished, true)));
+  }
+
+  async getContentByCategory(category: string): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(
+        and(
+          sql`${content.categories} @> ARRAY[${category}]::text[]`,
+          eq(content.isPublished, true)
+        )
+      );
+  }
+
+  async getFeaturedContent(): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(eq(content.isPublished, true))
+      .orderBy(desc(content.views))
+      .limit(8);
+  }
+
+  async getTrendingContent(): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(eq(content.isPublished, true))
+      .orderBy(desc(content.views))
+      .limit(10);
+  }
+
+  async getNewContent(): Promise<Content[]> {
+    return await db
+      .select()
+      .from(content)
+      .where(eq(content.isPublished, true))
+      .orderBy(desc(content.createdAt))
+      .limit(6);
+  }
+
+  async createContent(insertContent: InsertContent): Promise<Content> {
+    const [newContent] = await db
+      .insert(content)
+      .values(insertContent)
+      .returning();
+    return newContent;
+  }
+
+  async updateContent(id: number, data: Partial<Content>): Promise<Content | undefined> {
+    const [updatedContent] = await db
+      .update(content)
+      .set({
+        ...data,
+        updatedAt: new Date()
+      })
+      .where(eq(content.id, id))
+      .returning();
+    return updatedContent || undefined;
+  }
+
+  async deleteContent(id: number): Promise<boolean> {
+    const result = await db.delete(content).where(eq(content.id, id));
+    return result.count > 0;
+  }
+
+  async incrementContentViews(id: number): Promise<void> {
+    await db
+      .update(content)
+      .set({
+        views: sql`${content.views} + 1`
+      })
+      .where(eq(content.id, id));
+  }
+
+  // Category methods
+  async getCategory(id: number): Promise<Category | undefined> {
+    const [category] = await db.select().from(categories).where(eq(categories.id, id));
+    return category || undefined;
+  }
+
+  async getAllCategories(): Promise<Category[]> {
+    return await db.select().from(categories);
+  }
+
+  async createCategory(insertCategory: InsertCategory): Promise<Category> {
+    const [category] = await db
+      .insert(categories)
+      .values(insertCategory)
+      .returning();
+    return category;
+  }
+
+  async updateCategory(id: number, data: Partial<Category>): Promise<Category | undefined> {
+    const [category] = await db
+      .update(categories)
+      .set(data)
+      .where(eq(categories.id, id))
+      .returning();
+    return category || undefined;
+  }
+
+  async deleteCategory(id: number): Promise<boolean> {
+    const result = await db.delete(categories).where(eq(categories.id, id));
+    return result.count > 0;
+  }
+
+  // Subscription plan methods
+  async getSubscriptionPlan(id: number): Promise<SubscriptionPlan | undefined> {
+    const [plan] = await db.select().from(subscriptionPlans).where(eq(subscriptionPlans.id, id));
+    return plan || undefined;
+  }
+
+  async getAllSubscriptionPlans(): Promise<SubscriptionPlan[]> {
+    return await db
+      .select()
+      .from(subscriptionPlans)
+      .where(eq(subscriptionPlans.isActive, true));
+  }
+
+  async createSubscriptionPlan(insertPlan: InsertSubscriptionPlan): Promise<SubscriptionPlan> {
+    const [plan] = await db
+      .insert(subscriptionPlans)
+      .values(insertPlan)
+      .returning();
+    return plan;
+  }
+
+  async updateSubscriptionPlan(id: number, data: Partial<SubscriptionPlan>): Promise<SubscriptionPlan | undefined> {
+    const [plan] = await db
+      .update(subscriptionPlans)
+      .set(data)
+      .where(eq(subscriptionPlans.id, id))
+      .returning();
+    return plan || undefined;
+  }
+
+  async deleteSubscriptionPlan(id: number): Promise<boolean> {
+    const result = await db.delete(subscriptionPlans).where(eq(subscriptionPlans.id, id));
+    return result.count > 0;
+  }
+
+  // Favorite methods
+  async getFavoritesByUser(userId: number): Promise<Content[]> {
+    const userFavorites = await db
+      .select({
+        content: content
+      })
+      .from(content)
+      .innerJoin(
+        favorites,
+        and(
+          eq(favorites.contentId, content.id),
+          eq(favorites.userId, userId)
+        )
+      )
+      .where(eq(content.isPublished, true));
+    
+    return userFavorites.map(item => item.content);
+  }
+
+  async addFavorite(insertFavorite: InsertFavorite): Promise<Favorite> {
+    const [favorite] = await db
+      .insert(favorites)
+      .values(insertFavorite)
+      .returning();
+    return favorite;
+  }
+
+  async removeFavorite(userId: number, contentId: number): Promise<boolean> {
+    const result = await db
+      .delete(favorites)
+      .where(
+        and(
+          eq(favorites.userId, userId),
+          eq(favorites.contentId, contentId)
+        )
+      );
+    return result.count > 0;
+  }
+
+  // Admin methods
+  async getAdminStats(): Promise<{
+    totalViews: number;
+    premiumMembers: number;
+    contentCount: {
+      total: number;
+      videos: number;
+      photos: number;
+      premium: number;
+      free: number;
+    };
+    recentContent: Content[];
+  }> {
+    // Get total views
+    const [viewsResult] = await db
+      .select({
+        totalViews: sql`sum(${content.views})`
+      })
+      .from(content);
+    
+    // Get premium members count
+    const [premiumResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(users)
+      .where(eq(users.isPremium, true));
+    
+    // Get content counts
+    const [totalResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(content);
+    
+    const [videosResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(content)
+      .where(eq(content.type, 'video'));
+    
+    const [photosResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(content)
+      .where(eq(content.type, 'photo'));
+    
+    const [premiumContentResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(content)
+      .where(eq(content.accessLevel, 'premium'));
+    
+    const [freeContentResult] = await db
+      .select({
+        count: sql`count(*)::int`
+      })
+      .from(content)
+      .where(eq(content.accessLevel, 'free'));
+    
+    // Get recent content
+    const recentContent = await db
+      .select()
+      .from(content)
+      .orderBy(desc(content.createdAt))
+      .limit(5);
+    
+    return {
+      totalViews: Number(viewsResult.totalViews) || 0,
+      premiumMembers: premiumResult.count || 0,
+      contentCount: {
+        total: totalResult.count || 0,
+        videos: videosResult.count || 0,
+        photos: photosResult.count || 0,
+        premium: premiumContentResult.count || 0,
+        free: freeContentResult.count || 0
+      },
+      recentContent
+    };
+  }
+}
+
+// Setup session store for express-session
+import connectPgSimple from 'connect-pg-simple';
+import session from 'express-session';
+
+export function getSessionStore() {
+  const PgStore = connectPgSimple(session);
+  
+  return new PgStore({
+    conObject: {
+      connectionString: process.env.DATABASE_URL
+    },
+    tableName: 'session',
+    createTableIfMissing: true
+  });
+}
+
+// Use database storage
+export const storage = new DatabaseStorage();
