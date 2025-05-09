@@ -14,7 +14,7 @@ export default function ContentCard({ content, variant = "medium" }: ContentCard
   const isNew = new Date(content.createdAt).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000;
   
   return (
-    <div className="group bg-white border border-gray-200 overflow-hidden transition-all hover:shadow-md">
+    <div className="group bg-white border border-gray-200 overflow-hidden transition-all hover:shadow-md rounded-sm">
       <Link href={`/view/${content.id}`}>
         <div className="relative aspect-video bg-gray-100">
           {content.thumbnailUrl ? (
@@ -41,7 +41,7 @@ export default function ContentCard({ content, variant = "medium" }: ContentCard
           {/* Premium badge */}
           {isPremium && (
             <div className="absolute top-2 right-2 z-10">
-              <Badge className="bg-pink-600 text-white text-xs px-2 py-1 uppercase font-semibold">
+              <Badge className="bg-red-600 text-white text-xs px-2 py-1 uppercase font-semibold">
                 Premium
               </Badge>
             </div>
@@ -60,10 +60,10 @@ export default function ContentCard({ content, variant = "medium" }: ContentCard
           {isPremium && (
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <div className="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-pink-600 mx-auto mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-red-600 mx-auto mb-2">
                   <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
                 </svg>
-                <Button className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-4 py-1">
+                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-1">
                   Unlock
                 </Button>
               </div>
@@ -73,7 +73,7 @@ export default function ContentCard({ content, variant = "medium" }: ContentCard
           {/* Play button */}
           {content.type === "video" && !isPremium && (
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 bg-pink-600 rounded-full flex items-center justify-center">
+              <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white ml-1">
                   <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
                 </svg>
@@ -85,16 +85,16 @@ export default function ContentCard({ content, variant = "medium" }: ContentCard
       
       <div className="p-3">
         <div className="flex items-start justify-between">
-          <div>
+          <div className="w-full">
             <h3 className="font-medium text-gray-900 mb-1 line-clamp-1">{content.title}</h3>
-            <div className="flex text-xs text-gray-500">
+            <div className="flex text-xs text-gray-500 justify-between">
               {content.categories && content.categories.length > 0 && (
-                <span>{content.categories[0]}</span>
+                <span className="truncate max-w-[70%]">{content.categories[0]}</span>
               )}
               {isPremium ? (
-                <span className="ml-auto text-pink-600 font-medium">Premium</span>
+                <span className="text-red-600 font-medium">Premium</span>
               ) : (
-                <span className="ml-auto">Free</span>
+                <span>Free</span>
               )}
             </div>
           </div>

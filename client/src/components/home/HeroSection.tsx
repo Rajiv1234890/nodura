@@ -5,14 +5,14 @@ export default function HeroSection() {
   return (
     <div className="bg-black text-white">
       {/* Top Promotion Banner */}
-      <div className="bg-pink-600 text-white text-center py-3">
+      <div className="bg-red-600 text-white text-center py-3">
         <div className="container mx-auto px-4">
           <p>Upgrade to Premium for ad-free viewing and exclusive content. <Link href="/subscription" className="underline font-medium">Try it free for 7 days</Link></p>
         </div>
       </div>
       
       {/* Hero Content */}
-      <section className="relative overflow-hidden bg-gray-900">
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(to right, #111111, #1a1a1a)" }}>
         <div className="container mx-auto px-4 py-16 md:py-24 lg:py-32">
           <div className="flex flex-col items-center text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -23,7 +23,7 @@ export default function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/browse?type=free">
-                <Button className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-10 py-6 h-auto" size="lg">
+                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-10 py-6 h-auto" size="lg">
                   Browse Free Videos
                 </Button>
               </Link>
@@ -42,7 +42,7 @@ export default function HeroSection() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">Free Videos</h2>
-            <Link href="/browse?type=free" className="text-pink-600 hover:underline">View All →</Link>
+            <Link href="/browse?type=free" className="text-red-600 hover:underline">View All →</Link>
           </div>
           {/* Grid would go here, but we'll rely on the existing content components */}
         </div>
