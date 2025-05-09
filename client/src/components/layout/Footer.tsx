@@ -4,110 +4,105 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-800 text-white py-12">
+    <footer className="bg-gray-900 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="text-2xl font-bold text-white mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 inline-block mr-2">
-                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clipRule="evenodd" />
-              </svg>
-              MediaPremium
+              NUDORA
             </div>
-            <p className="text-gray-400 mb-4">Premium video and photo content platform for professionals and enthusiasts.</p>
+            <p className="text-gray-400 mb-4">Premium photo and video content with new uploads daily.</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm0 8.625a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM15.375 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zM8.625 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" />
+              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
                 </svg>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM17.78 9.22a.75.75 0 10-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 001.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 101.06-1.06L20.56 12l1.72-1.72a.75.75 0 00-1.06-1.06l-1.72 1.72-1.72-1.72z" />
-                </svg>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path fillRule="evenodd" d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z" clipRule="evenodd" />
+              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
             </div>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">Navigation</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
+                <Link href="/" className="text-gray-400 hover:text-pink-500 transition-colors">Home</Link>
               </li>
               <li>
-                <Link href="/browse" className="text-gray-400 hover:text-white transition-colors">Browse</Link>
+                <Link href="/gallery" className="text-gray-400 hover:text-pink-500 transition-colors">Gallery</Link>
               </li>
               <li>
-                <Link href="/browse?category=trending" className="text-gray-400 hover:text-white transition-colors">Trending</Link>
+                <Link href="/subscription" className="text-gray-400 hover:text-pink-500 transition-colors">Subscription</Link>
               </li>
               <li>
-                <Link href="/browse?category=new" className="text-gray-400 hover:text-white transition-colors">New Content</Link>
+                <Link href="/browse?type=video" className="text-gray-400 hover:text-pink-500 transition-colors">Videos</Link>
+              </li>
+              <li>
+                <Link href="/browse?type=photo" className="text-gray-400 hover:text-pink-500 transition-colors">Photos</Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Premium</h3>
+            <h3 className="text-lg font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing Plans</Link>
+                <Link href="/browse?category=nature" className="text-gray-400 hover:text-pink-500 transition-colors">Nature</Link>
               </li>
               <li>
-                <Link href="/pricing#features" className="text-gray-400 hover:text-white transition-colors">Features</Link>
+                <Link href="/browse?category=urban" className="text-gray-400 hover:text-pink-500 transition-colors">Urban</Link>
               </li>
               <li>
-                <Link href="/pricing#gift" className="text-gray-400 hover:text-white transition-colors">Gift Cards</Link>
+                <Link href="/browse?category=people" className="text-gray-400 hover:text-pink-500 transition-colors">People</Link>
               </li>
               <li>
-                <Link href="/pricing#corporate" className="text-gray-400 hover:text-white transition-colors">Corporate Accounts</Link>
+                <Link href="/browse?category=technology" className="text-gray-400 hover:text-pink-500 transition-colors">Technology</Link>
+              </li>
+              <li>
+                <Link href="/browse?category=food" className="text-gray-400 hover:text-pink-500 transition-colors">Food</Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Help Center</a>
+                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">Terms of Service</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Contact Us</a>
+                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">Privacy Policy</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">Cookie Policy</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">DMCA</a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">2257 Statement</a>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">© {currentYear} MediaPremium. All rights reserved.</p>
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm">© {currentYear} NUDORA. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
-            <ul className="flex space-x-6">
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Privacy</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Terms</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Cookies</a>
-              </li>
-            </ul>
+            <div className="text-gray-500 text-sm">
+              Upgrade to Premium for ad-free viewing and exclusive content. <Link href="/subscription" className="text-pink-500 hover:underline">Try it free for 7 days</Link>
+            </div>
           </div>
         </div>
       </div>
