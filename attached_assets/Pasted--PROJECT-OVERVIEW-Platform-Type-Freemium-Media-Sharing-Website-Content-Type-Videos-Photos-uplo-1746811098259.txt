@@ -1,0 +1,168 @@
+✅ PROJECT OVERVIEW
+Platform Type: Freemium Media Sharing Website
+Content Type: Videos & Photos (uploaded/admin-managed only)
+Access: Free (teasers, previews) + Premium (full content via subscription/payment)
+Frontend: Public Website
+Backend: Admin Panel (for full content management)
+
+🎯 USER-FACING WEBSITE (PUBLIC)
+1. Homepage
+Display grid of free teaser content
+
+Dynamic banners or ads (Google AdSense or custom)
+
+Category filters: 🔥 Trending, 🆕 New, 🏷️ Tags
+
+Featured Premium Content Teasers
+
+2. Content Listing Page
+Responsive grid of:
+
+Video previews (blurred or partial view for premium)
+
+Image galleries
+
+Labels: Free / Premium
+
+Search & filter (by category, date, views)
+
+3. Content Viewer
+Free: Full access to teaser
+
+Premium: Paywall overlay with blur, call to action to subscribe
+
+Optional:
+
+Comments/likes (optional)
+
+Ads or banners during playback
+
+4. Pricing / Subscription Page
+Show premium plans (Monthly, Yearly, One-time)
+
+Integration with Stripe / CCBill / Verotel
+
+Call-to-action buttons
+
+FAQ section
+
+5. Authentication (Optional)
+Login/Signup via email or Google
+
+Manage subscription
+
+View watch history (for logged-in users)
+
+6. Advertisement System
+Show ads:
+
+Before content loads
+
+As interstitial popups
+
+As banners in grid and player pages
+
+Ad slots managed from admin
+
+🛠️ ADMIN PANEL FEATURES
+1. Dashboard
+Stats:
+
+Total views
+
+Revenue
+
+Premium members
+
+Daily/weekly uploads
+
+Graphs (e.g., line charts, pie charts)
+
+Quick actions: Upload, Manage Media, View Reports
+
+2. Media Upload & Management
+Upload videos/photos
+
+Add metadata:
+
+Title, description, tags
+
+Content type: Free / Premium
+
+Thumbnail selection
+
+Schedule release (date/time)
+
+Optional: Blur generator for previews
+
+Delete/edit media
+
+3. Categories & Tags
+Create/manage categories
+
+Add tags to improve filtering/search
+
+4. Subscription Plan Control
+Add/edit pricing plans (monthly, yearly)
+
+Attach content access level
+
+Set discounts/promotions
+
+5. User Management (Optional)
+View user list
+
+Subscription status
+
+Payment history
+
+Manual upgrade/downgrade
+
+6. Ad Manager
+Add/edit/remove ad banners (image or code)
+
+Set position: Top, Mid-grid, Player page, Popups
+
+Set frequency: Every X views/clicks
+
+Track impressions, clicks
+
+7. Content Performance
+Views per content
+
+Likes/downloads (if allowed)
+
+Conversion rate (views to premium)
+
+8. Moderation Tools
+Enable/disable content
+
+Flag content (auto/manual)
+
+Audit logs: who uploaded/edited
+
+9. Email Marketing & Notifications (Optional)
+Collect emails from users
+
+Send newsletters or premium content promos
+
+Notification settings (new uploads, offers)
+
+10. Settings
+Website title/logo
+
+Domain setup
+
+Payment provider credentials
+
+Legal: Privacy Policy, T&C editor
+
+11. Role-Based Access (RBAC)
+Super Admin
+
+Content Manager (upload/edit only)
+
+Ad Manager
+
+Analyst (view stats only)
+
