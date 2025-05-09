@@ -12,6 +12,7 @@ import AuthPage from "@/pages/auth-page";
 import AdminDashboard from "@/pages/admin/dashboard";
 import { ProtectedRoute } from "./lib/protected-route";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { AuthProvider } from "./hooks/use-auth";
 
 function Router() {
   return (
@@ -31,12 +32,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="media-premium-theme">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider defaultTheme="light" storageKey="nudora-theme">
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

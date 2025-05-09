@@ -17,8 +17,8 @@ export default function Header() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/browse", label: "Browse" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/gallery", label: "Gallery" },
+    { href: "/subscription", label: "Subscription" },
   ];
 
   return (
@@ -26,13 +26,10 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-2">
-            <Link href="/" className="text-2xl font-bold text-blue-500">
+            <Link href="/" className="text-2xl font-bold text-pink-600">
               <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2">
-                  <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clipRule="evenodd" />
-                </svg>
-                <span className="hidden sm:inline">MediaPremium</span>
-                <span className="sm:hidden">MP</span>
+                <span className="hidden sm:inline">NUDORA</span>
+                <span className="sm:hidden">ND</span>
               </div>
             </Link>
           </div>
@@ -44,8 +41,8 @@ export default function Header() {
                 href={link.href} 
                 className={`${
                   location === link.href
-                    ? "text-blue-500"
-                    : "text-gray-700 hover:text-blue-500"
+                    ? "text-pink-600"
+                    : "text-gray-700 hover:text-pink-600"
                 } transition-colors`}
               >
                 {link.label}
@@ -54,50 +51,45 @@ export default function Header() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <div className="hidden sm:block">
-              <Link href="/pricing">
-                <Button className="bg-blue-500 hover:bg-blue-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mr-2">
-                    <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-                  </svg>
-                  Get Premium
-                </Button>
-              </Link>
-            </div>
-            
-            <div className="block sm:hidden">
-              <Link href="/pricing">
-                <Button className="bg-blue-500 hover:bg-blue-600 px-3 py-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                    <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-                  </svg>
-                </Button>
-              </Link>
-            </div>
-            
+            {/* Theme toggle */}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-gray-700 hover:text-blue-500">
+                  <Button variant="ghost" size="icon" className="text-gray-700 hover:text-pink-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                      <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clipRule="evenodd" />
+                      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
                     </svg>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Search</p>
+                  <p>Toggle theme</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            
-            {user ? (
+
+            {/* Sign Up / Login buttons */}
+            {!user ? (
+              <div className="flex items-center space-x-2">
+                <Link href="/auth">
+                  <Button variant="ghost" className="text-gray-700 hover:text-pink-600">
+                    Login
+                  </Button>
+                </Link>
+                
+                <Link href="/auth?mode=register">
+                  <Button className="bg-pink-600 hover:bg-pink-700">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            ) : (
               <div className="flex items-center space-x-2">
                 {user.isAdmin && (
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Link href="/admin">
-                          <Button variant="ghost" size="icon" className="text-gray-700 hover:text-blue-500">
+                          <Button variant="ghost" size="icon" className="text-gray-700 hover:text-pink-600">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                               <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75c-1.036 0-1.875-.84-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75C3.84 21.75 3 20.91 3 19.875v-6.75z" />
                             </svg>
@@ -113,7 +105,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="text-gray-700 hover:text-blue-500"
+                  className="text-gray-700 hover:text-pink-600"
                   onClick={() => logoutMutation.mutate()}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -121,20 +113,12 @@ export default function Header() {
                   </svg>
                 </Button>
               </div>
-            ) : (
-              <Link href="/auth">
-                <Button variant="ghost" size="icon" className="text-gray-700 hover:text-blue-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                    <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
-                  </svg>
-                </Button>
-              </Link>
             )}
             
             <Button 
               variant="ghost" 
               size="icon" 
-              className="md:hidden text-gray-700 hover:text-blue-500"
+              className="md:hidden text-gray-700 hover:text-pink-600"
               onClick={() => setMobileMenuOpen(true)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
